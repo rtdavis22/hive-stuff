@@ -1,0 +1,26 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.6
+version = '1.0'
+
+repositories {
+    mavenCentral()	
+    maven { url "https://repository.cloudera.com/artifactory/cloudera-repos/" }
+}
+
+ext.hadoopVersion = '2.0.0-mr1-cdh4.1.3'
+ext.hiveVersion = '0.10.0-cdh4.4.0'
+dependencies {
+  compile "org.apache.hadoop:hadoop-client:${hadoopVersion}"
+  compile "org.apache.hive:hive-serde:${hiveVersion}"
+  compile "org.apache.hive:hive-common:${hiveVersion}"
+  compile "org.apache.hive:hive-exec:${hiveVersion}"
+  compile "joda-time:joda-time:2.2"
+  compile "com.maxmind.geoip:geoip-api:1.2.10"
+}
+
+jar {
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+}
+
+jar.baseName = "hive-stuff"
