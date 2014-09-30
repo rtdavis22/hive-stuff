@@ -1,5 +1,3 @@
-package com.bittorrent.stats.hive.udfs;
-
 import java.util.ArrayList;
 import java.util.List;
 
